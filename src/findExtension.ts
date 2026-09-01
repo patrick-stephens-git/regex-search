@@ -25,7 +25,7 @@ const initialState: FindState = {
 export const toggleOpenEffect = StateEffect.define<boolean>();
 export const setQueryEffect = StateEffect.define<string>();
 export const setModeEffect = StateEffect.define<SearchMode>();
-const navigateEffect = StateEffect.define<1 | -1>();
+const navigateEffect = StateEffect.define<number>();
 
 function buildDecorations(matches: MatchRange[], activeIndex: number): DecorationSet {
 	if (!matches.length) return Decoration.none;
@@ -79,10 +79,7 @@ const findField = StateField.define<FindState>({
 
 		for (const effect of tr.effects) {
 			if (effect.is(navigateEffect) && next.matches.length) {
-				let idx = next.activeIndex + effect.value;
-				if (idx < 0) idx = next.matches.length - 1;
-				if (idx >= next.matches.length) idx = 0;
-				next = { ...next, activeIndex: idx, decorations: buildDecorations(next.matches, idx) };
+				next = { ...next, activeIndex: effect.value, decorations: buildDecorations(next.matches, effect.value) };
 			}
 		}
 
@@ -132,7 +129,7 @@ export function navigateMatch(view: EditorView, dir: 1 | -1): void {
 	if (idx === -1) return;
 	const match = state.matches[idx];
 	view.dispatch({
-		effects: [navigateEffect.of(dir), EditorView.scrollIntoView(match.from, { y: "center" })],
+		effects: [navigateEffect.of(idx), EditorView.scrollIntoView(match.from, { y: "center" })],
 		selection: EditorSelection.range(match.from, match.to),
 	});
 }
