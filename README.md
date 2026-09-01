@@ -1,4 +1,4 @@
-# Regex Search & Replace
+# Regex Search
 
 Find matches in the current note using a regex or plain-text pattern, with live highlighting, next/previous navigation, and select-all-to-edit.
 
@@ -21,4 +21,4 @@ npm run build  # type-check + production build
 
 ## Manual installation
 
-Copy `main.js`, `manifest.json`, and `styles.css` into `<vault>/.obsidian/plugins/regex-search-and-replace/`, then enable the plugin in Settings → Community plugins.
+Copy `main.js`, `manifest.json`, and `styles.css` into `<vault>/.obsidian/plugins/regex-search/`, then enable the plugin in Settings → Community plugins.

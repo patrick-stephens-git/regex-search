@@ -2,7 +2,7 @@ import { Plugin } from "obsidian";
 import type { EditorView } from "@codemirror/view";
 import { openFindBar, regexFindExtension } from "./findExtension";
 
-export default class RegexSearchReplacePlugin extends Plugin {
+export default class RegexSearchPlugin extends Plugin {
 	async onload(): Promise<void> {
 		this.registerEditorExtension(regexFindExtension);
 

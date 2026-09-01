@@ -1,5 +1,5 @@
 {
-	"name": "regex-search-and-replace",
+	"name": "regex-search",
 	"version": "0.1.0",
 	"description": "Find matches in the current note using a regex or plain-text pattern, with live highlighting, next/previous navigation, and select-all-to-edit.",
 	"main": "main.js",
