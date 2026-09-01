@@ -1,0 +1,9 @@
+{
+	"id": "regex-search-and-replace",
+	"name": "Regex Search & Replace",
+	"version": "0.1.0",
+	"minAppVersion": "0.15.0",
+	"description": "Find matches in the current note using a regex or plain-text pattern, with live highlighting, next/previous navigation, and select-all-to-edit.",
+	"author": "Patrick Stephens",
+	"isDesktopOnly": false
+}
