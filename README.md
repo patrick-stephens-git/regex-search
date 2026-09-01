@@ -14,10 +14,12 @@ Find matches in the current note using a regex or plain-text pattern, with live 
 ## Development
 
 ```bash
-npm install
-npm run dev    # watch build
-npm run build  # type-check + production build
+npm install    # install dependencies (run once, or after they change)
+npm run dev    # bundle src/main.ts into main.js and rebuild on every save
+npm run build  # type-check, then produce a minified main.js for release
 ```
+
+Point `<vault>/.obsidian/plugins/regex-search/` at this repo (or symlink it) during `npm run dev`, and reload the plugin in Obsidian after each save. Run `npm run build` before copying the plugin into a vault for real use.
 
 ## Manual installation
 
