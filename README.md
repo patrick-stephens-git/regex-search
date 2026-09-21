@@ -4,7 +4,7 @@ Find matches in the current note using a regex or plain-text pattern, with live 
 
 ## Usage
 
-- Run **"Open regex find bar"** to open the find bar above the note. No hotkey is bound by default — assign one in Settings → Hotkeys (e.g. `Cmd/Ctrl+Shift+F`, since the default Obsidian in-note search already owns `Cmd/Ctrl+F`).
+- Run **"Open regex find bar"** to open the find bar above the note. No hotkey is bound by default — assign one in Settings → Hotkeys. Running the command while the bar is already open moves focus back to the input and selects its text. To make it your `Cmd/Ctrl+F`, first clear that key from Obsidian's built-in "Search in current file" (which owns it by default), then bind it to this command; otherwise `Cmd/Ctrl+Shift+F` is a conflict-free choice.
 - Click the icon button to toggle between regex and plain-text matching. An invalid regex falls back to plain-text matching automatically.
 - Type to see matches highlighted live as you type.
 - `Enter` / `Shift+Enter` (or the arrow buttons) jump to the next / previous match.

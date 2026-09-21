@@ -100,13 +100,23 @@ function nextActiveIndex(state: FindState, dir: 1 | -1): number {
 }
 
 export function openFindBar(view: EditorView): void {
-	const sel = view.state.selection.main;
-	const selectedText = sel.empty ? "" : view.state.sliceDoc(sel.from, sel.to);
+	const alreadyOpen = view.state.field(findField).open;
 	const effects: StateEffect<unknown>[] = [toggleOpenEffect.of(true)];
-	if (selectedText && !selectedText.includes("\n")) {
-		effects.push(setQueryEffect.of(selectedText));
+	// Only seed from the selection on a fresh open: while the bar is open, navigating
+	// sets the selection to the current match, which would clobber a regex query.
+	if (!alreadyOpen) {
+		const sel = view.state.selection.main;
+		const selectedText = sel.empty ? "" : view.state.sliceDoc(sel.from, sel.to);
+		if (selectedText && !selectedText.includes("\n")) {
+			effects.push(setQueryEffect.of(selectedText));
+		}
 	}
 	view.dispatch({ effects });
+
+	// The panel's mount() only focuses on creation, so re-focus when it was already open.
+	const input = view.dom.querySelector<HTMLInputElement>(".regex-find-input");
+	input?.focus();
+	input?.select();
 }
 
 export function closeFindBar(view: EditorView): void {
