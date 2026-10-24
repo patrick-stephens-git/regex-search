@@ -152,6 +152,33 @@ export function selectAllMatches(view: EditorView): void {
 	view.focus();
 }
 
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function svgElement(tag: string, attrs: Record<string, string>): SVGElement {
+	const el = document.createElementNS(SVG_NS, tag);
+	for (const [name, value] of Object.entries(attrs)) el.setAttribute(name, value);
+	return el;
+}
+
+function createModeIcon(): SVGElement {
+	const svg = svgElement("svg", {
+		viewBox: "0 0 24 24",
+		class: "svg-icon regex-search-mode-icon",
+		fill: "none",
+		stroke: "currentColor",
+		"stroke-width": "2",
+		"stroke-linecap": "round",
+		"stroke-linejoin": "round",
+	});
+	svg.append(
+		svgElement("circle", { cx: "4", cy: "19", r: "1.6", fill: "currentColor", stroke: "none" }),
+		svgElement("line", { x1: "15", y1: "4", x2: "15", y2: "16" }),
+		svgElement("line", { x1: "20", y1: "7", x2: "10", y2: "13" }),
+		svgElement("line", { x1: "10", y1: "7", x2: "20", y2: "13" })
+	);
+	return svg;
+}
+
 function createSearchPanel(view: EditorView): Panel {
 	const dom = document.createElement("div");
 	dom.className = "regex-search-panel";
@@ -160,13 +187,7 @@ function createSearchPanel(view: EditorView): Panel {
 	modeButton.className = "regex-search-mode-button clickable-icon";
 	modeButton.type = "button";
 	modeButton.setAttribute("aria-label", "Toggle regex / plain text mode");
-	modeButton.innerHTML =
-		'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-icon regex-search-mode-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-		'<circle cx="4" cy="19" r="1.6" fill="currentColor" stroke="none"></circle>' +
-		'<line x1="15" y1="4" x2="15" y2="16"></line>' +
-		'<line x1="20" y1="7" x2="10" y2="13"></line>' +
-		'<line x1="10" y1="7" x2="20" y2="13"></line>' +
-		"</svg>";
+	modeButton.appendChild(createModeIcon());
 
 	const inputWrap = document.createElement("div");
 	inputWrap.className = "regex-search-input-wrap";

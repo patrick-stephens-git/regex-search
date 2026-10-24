@@ -6,5 +6,5 @@
 	"description": "Find matches in the current note using a regex or plain-text pattern, with live highlighting, next/previous navigation, and select-all-to-edit.",
 	"author": "Patrick Stephens",
 	"authorUrl": "https://patrickcstephens.com/",
-	"isDesktopOnly": false
+	"isDesktopOnly": true
 }

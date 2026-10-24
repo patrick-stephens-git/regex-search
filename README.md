@@ -2,6 +2,8 @@
 
 Find matches in the current note using a regex or plain-text pattern, with live highlighting, next/previous navigation, and select-all-to-edit.
 
+This plugin is desktop only (it isn't available on Obsidian mobile). I built and tested it on macOS. It should work the same on Windows and Linux, but I haven't tried those, so please open an issue if something doesn't work.
+
 ## Usage
 
 1. Make sure Regex Search is turned on. Open Settings → Community plugins and switch on the toggle next to **Regex Search**.
@@ -47,16 +49,6 @@ No hotkey is bound by default. I recommend using `Cmd/Ctrl+F`, since that's wher
 3. Type "Regex Search" in the search box. Next to **Regex Search: Open regex search bar**, click the `+` button, press `Cmd/Ctrl+F` on your keyboard, and confirm.
 
 If you'd rather keep the built-in search, use `Cmd/Ctrl+Shift+F` in step 3 instead, and skip step 2.
-
-## Development
-
-```bash
-npm install    # install dependencies (run once, or after they change)
-npm run dev    # bundle src/main.ts into main.js and rebuild on every save
-npm run build  # type-check, then produce a minified main.js for release
-```
-
-Point `<vault>/.obsidian/plugins/regex-search/` at this repo (or symlink it) during `npm run dev`, and reload the plugin in Obsidian after each save. Run `npm run build` before copying the plugin into a vault for real use.
 
 ## Manual installation
 
