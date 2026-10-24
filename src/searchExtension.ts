@@ -225,7 +225,7 @@ function createSearchPanel(view: EditorView): Panel {
 			countLabel.textContent = `${state.activeIndex + 1}/${state.matches.length}`;
 		}
 		countLabel.classList.toggle("regex-search-invalid", state.invalidRegex);
-		if (state.invalidRegex) countLabel.title = "Invalid regex — matching as plain text";
+		if (state.invalidRegex) countLabel.title = "Invalid regex, matching as plain text";
 		else countLabel.removeAttribute("title");
 
 		const hasMatches = state.matches.length > 0;
