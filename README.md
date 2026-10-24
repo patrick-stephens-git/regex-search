@@ -5,12 +5,12 @@ Find matches in the current note using a regex or plain-text pattern, with live 
 ## Usage
 
 1. Make sure Regex Search is turned on. Open Settings → Community plugins and switch on the toggle next to **Regex Search**.
-2. Open a note and make sure it's in editing mode. If you can't type in the note, it's in Reading view, so press `Cmd/Ctrl+E` to switch to editing mode. Live Preview and Source mode both work.
+2. Open a note and make sure it's in editing mode.
 3. Press `Cmd/Ctrl+P` to open the command palette, type "Regex Search", and choose **Regex Search: Open regex search bar**. The search bar appears at the top of the note with your cursor already in the search box. If you had text selected in the note, it's filled in for you. (To skip the command palette, [set up a hotkey](#setting-up-a-hotkey).)
 4. Type what you want to find. Every match in the note is highlighted as you type, and the current match has an outline.
 5. Press `Enter` to jump to the next match, or `Shift+Enter` to jump to the previous one.
-6. To edit every match at once, press `Alt/Option+Enter` (or click **Select all**). The search bar closes and every match is selected in the note. Start typing and all of them are replaced with what you type.
-7. Press `Esc` (or click the `×` button) to close the search bar.
+6. To edit every match at once, press `Option+Shift+Enter` on Mac or `Alt+Shift+Enter` on Windows/Linux, or click **Select all**. Every match is selected in the note and your cursor moves back into the note. Start typing and all of them are replaced with what you type. The search bar stays open.
+7. To close the search bar, click the `×` button, or press `Esc` while your cursor is in the search box.
 
 If the search bar is already open, running the command again moves your cursor back into the search box and selects its text.
 
@@ -22,7 +22,7 @@ From left to right, the search bar has:
 - **Search box.** Type here. Matches in the note are highlighted as you type.
 - **Match count** (inside the search box, on the right). Shows which match you're on and how many there are, such as `2/5`, or "No matches".
 - **Up and down arrow buttons** (`↑` and `↓`). Jump to the previous or next match.
-- **Select all button.** Selects every match at once as multiple cursors, so whatever you type next replaces all of them. This also closes the search bar.
+- **Select all button.** Selects every match at once as multiple cursors, so whatever you type next replaces all of them.
 - **Close button** (`×`). Closes the search bar.
 
 Searches are not case-sensitive in either mode, so `note` also matches `Note`. If you type an invalid regex, the bar falls back to plain-text matching automatically and the match count turns red.

@@ -148,10 +148,7 @@ export function selectAllMatches(view: EditorView): void {
 	const state = view.state.field(searchField);
 	if (!state.matches.length) return;
 	const ranges = state.matches.map((m) => EditorSelection.range(m.from, m.to));
-	view.dispatch({
-		selection: EditorSelection.create(ranges, 0),
-		effects: toggleOpenEffect.of(false),
-	});
+	view.dispatch({ selection: EditorSelection.create(ranges, 0) });
 	view.focus();
 }
 
@@ -201,7 +198,7 @@ function createSearchPanel(view: EditorView): Panel {
 	selectAllButton.type = "button";
 	selectAllButton.className = "regex-search-select-all-button";
 	selectAllButton.textContent = "Select all";
-	selectAllButton.title = "Select all matches (Alt+Enter)";
+	selectAllButton.title = "Select all matches (Alt+Shift+Enter)";
 
 	const closeButton = document.createElement("button");
 	closeButton.type = "button";
