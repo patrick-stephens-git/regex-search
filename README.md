@@ -37,6 +37,8 @@ A regex (regular expression) is a pattern that can match more than one exact pie
 - `cat|dog` matches "cat" or "dog".
 - `\d+` matches any number, such as "7" or "2026".
 - `[A-Z]{3}` matches any three capital letters in a row.
+- `^# ` matches level 1 headings (`# Title`). A level 2 heading (`## Title`) needs `^## ` instead, so the pattern has to include every `#` in the heading. To match a heading of any level, use `^#+ `.
+- `^` means the start of a line and `$` means the end of a line, so `done$` matches "done" only at the end of a line.
 
 If you don't need patterns, switch to plain-text mode and search for words as you normally would.
 

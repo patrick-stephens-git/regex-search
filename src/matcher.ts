@@ -28,7 +28,7 @@ export function compileMatcher(
 	}
 
 	try {
-		return { regex: new RegExp(query, "gi"), usedLiteralFallback: false };
+		return { regex: new RegExp(query, "gim"), usedLiteralFallback: false };
 	} catch {
 		return { regex: new RegExp(escapeRegExp(query), "gi"), usedLiteralFallback: true };
 	}

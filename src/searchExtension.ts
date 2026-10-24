@@ -22,9 +22,9 @@ const initialState: SearchState = {
 	decorations: Decoration.none,
 };
 
-export const toggleOpenEffect = StateEffect.define<boolean>();
-export const setQueryEffect = StateEffect.define<string>();
-export const setModeEffect = StateEffect.define<SearchMode>();
+const toggleOpenEffect = StateEffect.define<boolean>();
+const setQueryEffect = StateEffect.define<string>();
+const setModeEffect = StateEffect.define<SearchMode>();
 const navigateEffect = StateEffect.define<number>();
 
 function buildDecorations(matches: MatchRange[], activeIndex: number): DecorationSet {
@@ -119,21 +119,21 @@ export function openSearchBar(view: EditorView): void {
 	input?.select();
 }
 
-export function closeSearchBar(view: EditorView): void {
+function closeSearchBar(view: EditorView): void {
 	view.dispatch({ effects: toggleOpenEffect.of(false) });
 	view.focus();
 }
 
-export function setQuery(view: EditorView, query: string): void {
+function setQuery(view: EditorView, query: string): void {
 	view.dispatch({ effects: setQueryEffect.of(query) });
 }
 
-export function toggleMode(view: EditorView): void {
+function toggleMode(view: EditorView): void {
 	const state = view.state.field(searchField);
 	view.dispatch({ effects: setModeEffect.of(state.mode === "regex" ? "exact" : "regex") });
 }
 
-export function navigateMatch(view: EditorView, dir: 1 | -1): void {
+function navigateMatch(view: EditorView, dir: 1 | -1): void {
 	const state = view.state.field(searchField);
 	const idx = nextActiveIndex(state, dir);
 	if (idx === -1) return;
@@ -144,7 +144,7 @@ export function navigateMatch(view: EditorView, dir: 1 | -1): void {
 	});
 }
 
-export function selectAllMatches(view: EditorView): void {
+function selectAllMatches(view: EditorView): void {
 	const state = view.state.field(searchField);
 	if (!state.matches.length) return;
 	const ranges = state.matches.map((m) => EditorSelection.range(m.from, m.to));
