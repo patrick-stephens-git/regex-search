@@ -8,7 +8,7 @@ This plugin is desktop only (it isn't available on Obsidian mobile). I built and
 
 1. Make sure Regex Search Bar is turned on. Open Settings → Community plugins and switch on the toggle next to **Regex Search Bar**.
 2. Open a note and make sure it's in editing mode.
-3. Press `Cmd/Ctrl+P` to open the command palette, type "Regex Search Bar", and choose **Regex Search Bar: Open regex search bar**. The search bar appears at the top of the note with your cursor already in the search box. If you had text selected in the note, it's filled in for you. (To skip the command palette, [set up a hotkey](#setting-up-a-hotkey).)
+3. Press `Cmd/Ctrl+P` to open the command palette, type "Regex Search Bar", and choose **Regex Search Bar: Open search bar**. The search bar appears at the top of the note with your cursor already in the search box. If you had text selected in the note, it's filled in for you. (To skip the command palette, [set up a hotkey](#setting-up-a-hotkey).)
 4. Type what you want to find. Every match in the note is highlighted as you type, and the current match has an outline.
 5. Press `Enter` to jump to the next match, or `Shift+Enter` to jump to the previous one.
 6. To edit every match at once, press `Option+Shift+Enter` on Mac or `Alt+Shift+Enter` on Windows/Linux, or click **Select all**. Every match is selected in the note and your cursor moves back into the note. Start typing and all of them are replaced with what you type. The search bar stays open.
@@ -48,7 +48,7 @@ No hotkey is bound by default. I recommend using `Cmd/Ctrl+F`, since that's wher
 
 1. Open Settings (the gear icon at the bottom left, or `Cmd/Ctrl+,`), then choose **Hotkeys**.
 2. Type "Search in current file" in the search box at the top. Next to its `Cmd/Ctrl+F` hotkey, click the `×` to clear it. Obsidian binds `Cmd/Ctrl+F` to this command by default, so the two would conflict.
-3. Type "Regex Search Bar" in the search box. Next to **Regex Search Bar: Open regex search bar**, click the `+` button, press `Cmd/Ctrl+F` on your keyboard, and confirm.
+3. Type "Regex Search Bar" in the search box. Next to **Regex Search Bar: Open search bar**, click the `+` button, press `Cmd/Ctrl+F` on your keyboard, and confirm.
 
 If you'd rather keep the built-in search, use `Cmd/Ctrl+Shift+F` in step 3 instead, and skip step 2.
 

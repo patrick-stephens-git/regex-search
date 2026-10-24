@@ -1,7 +1,7 @@
 {
 	"id": "regex-search-bar",
 	"name": "Regex Search Bar",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"minAppVersion": "1.13.7",
 	"description": "Find matches in the current note using a regex or plain-text pattern, with live highlighting, next/previous navigation, and select-all-to-edit.",
 	"author": "Patrick Stephens",

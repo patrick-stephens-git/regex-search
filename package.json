@@ -1,6 +1,6 @@
 {
 	"name": "regex-search-bar",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Find matches in the current note using a regex or plain-text pattern, with live highlighting, next/previous navigation, and select-all-to-edit.",
 	"main": "main.js",
 	"scripts": {
@@ -12,7 +12,6 @@
 		"@codemirror/state": "6.5.0",
 		"@codemirror/view": "^6.26.0",
 		"@types/node": "^20.11.0",
-		"builtin-modules": "^3.3.0",
 		"esbuild": "^0.20.0",
 		"obsidian": "latest",
 		"tslib": "^2.6.0",

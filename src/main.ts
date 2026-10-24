@@ -8,7 +8,7 @@ export default class RegexSearchPlugin extends Plugin {
 
 		this.addCommand({
 			id: "open-search-bar",
-			name: "Open regex search bar",
+			name: "Open search bar",
 			editorCallback: (editor) => {
 				const view = (editor as unknown as { cm?: EditorView }).cm;
 				if (!view) return;
