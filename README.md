@@ -4,12 +4,22 @@ Find matches in the current note using a regex or plain-text pattern, with live 
 
 ## Usage
 
-- Run **"Open regex find bar"** to open the find bar above the note. No hotkey is bound by default — assign one in Settings → Hotkeys. Running the command while the bar is already open moves focus back to the input and selects its text. To make it your `Cmd/Ctrl+F`, first clear that key from Obsidian's built-in "Search in current file" (which owns it by default), then bind it to this command; otherwise `Cmd/Ctrl+Shift+F` is a conflict-free choice.
+- Run **"Open regex search bar"** to open the search bar above the note. If the bar is already open, running the command again moves focus back to the input and selects its text.
 - Click the icon button to toggle between regex and plain-text matching. An invalid regex falls back to plain-text matching automatically.
-- Type to see matches highlighted live as you type.
+- Type to see matches highlighted live.
 - `Enter` / `Shift+Enter` (or the arrow buttons) jump to the next / previous match.
-- `Alt+Enter` (or **Select all**) selects every match as multiple cursors — start typing to replace all occurrences at once.
-- `Esc` (or the `×` button) closes the find bar.
+- `Alt+Enter` (or **Select all**) selects every match as multiple cursors. Start typing to replace all occurrences at once.
+- `Esc` (or the `×` button) closes the search bar.
+
+## Setting up a hotkey
+
+No hotkey is bound by default. I recommend using `Cmd/Ctrl+F`, since that's where you'd normally reach for search:
+
+1. Open Settings → Hotkeys.
+2. Search for "Search in current file" and clear its hotkey. Obsidian binds `Cmd/Ctrl+F` to it by default, so the two would conflict.
+3. Search for "Regex Search: Open regex search bar" and assign `Cmd/Ctrl+F`.
+
+If you'd rather keep the built-in search, `Cmd/Ctrl+Shift+F` is a conflict-free choice.
 
 ## Development
 

@@ -2,7 +2,7 @@ import { EditorSelection, StateEffect, StateField, type Extension } from "@codem
 import { Decoration, type DecorationSet, EditorView, type Panel, showPanel } from "@codemirror/view";
 import { compileMatcher, findMatches, type MatchRange, type SearchMode } from "./matcher";
 
-interface FindState {
+interface SearchState {
 	open: boolean;
 	mode: SearchMode;
 	query: string;
@@ -12,7 +12,7 @@ interface FindState {
 	decorations: DecorationSet;
 }
 
-const initialState: FindState = {
+const initialState: SearchState = {
 	open: false,
 	mode: "regex",
 	query: "",
@@ -37,7 +37,7 @@ function buildDecorations(matches: MatchRange[], activeIndex: number): Decoratio
 	return Decoration.set(marks);
 }
 
-const findField = StateField.define<FindState>({
+const searchField = StateField.define<SearchState>({
 	create: () => initialState,
 	update(value, tr) {
 		let next = value;
@@ -87,11 +87,11 @@ const findField = StateField.define<FindState>({
 	},
 	provide: (field) => [
 		EditorView.decorations.from(field, (v) => v.decorations),
-		showPanel.from(field, (v) => (v.open ? createFindPanel : null)),
+		showPanel.from(field, (v) => (v.open ? createSearchPanel : null)),
 	],
 });
 
-function nextActiveIndex(state: FindState, dir: 1 | -1): number {
+function nextActiveIndex(state: SearchState, dir: 1 | -1): number {
 	if (!state.matches.length) return -1;
 	let idx = state.activeIndex + dir;
 	if (idx < 0) idx = state.matches.length - 1;
@@ -99,8 +99,8 @@ function nextActiveIndex(state: FindState, dir: 1 | -1): number {
 	return idx;
 }
 
-export function openFindBar(view: EditorView): void {
-	const alreadyOpen = view.state.field(findField).open;
+export function openSearchBar(view: EditorView): void {
+	const alreadyOpen = view.state.field(searchField).open;
 	const effects: StateEffect<unknown>[] = [toggleOpenEffect.of(true)];
 	// Only seed from the selection on a fresh open: while the bar is open, navigating
 	// sets the selection to the current match, which would clobber a regex query.
@@ -114,12 +114,12 @@ export function openFindBar(view: EditorView): void {
 	view.dispatch({ effects });
 
 	// The panel's mount() only focuses on creation, so re-focus when it was already open.
-	const input = view.dom.querySelector<HTMLInputElement>(".regex-find-input");
+	const input = view.dom.querySelector<HTMLInputElement>(".regex-search-input");
 	input?.focus();
 	input?.select();
 }
 
-export function closeFindBar(view: EditorView): void {
+export function closeSearchBar(view: EditorView): void {
 	view.dispatch({ effects: toggleOpenEffect.of(false) });
 	view.focus();
 }
@@ -129,12 +129,12 @@ export function setQuery(view: EditorView, query: string): void {
 }
 
 export function toggleMode(view: EditorView): void {
-	const state = view.state.field(findField);
+	const state = view.state.field(searchField);
 	view.dispatch({ effects: setModeEffect.of(state.mode === "regex" ? "exact" : "regex") });
 }
 
 export function navigateMatch(view: EditorView, dir: 1 | -1): void {
-	const state = view.state.field(findField);
+	const state = view.state.field(searchField);
 	const idx = nextActiveIndex(state, dir);
 	if (idx === -1) return;
 	const match = state.matches[idx];
@@ -145,7 +145,7 @@ export function navigateMatch(view: EditorView, dir: 1 | -1): void {
 }
 
 export function selectAllMatches(view: EditorView): void {
-	const state = view.state.field(findField);
+	const state = view.state.field(searchField);
 	if (!state.matches.length) return;
 	const ranges = state.matches.map((m) => EditorSelection.range(m.from, m.to));
 	view.dispatch({
@@ -155,16 +155,16 @@ export function selectAllMatches(view: EditorView): void {
 	view.focus();
 }
 
-function createFindPanel(view: EditorView): Panel {
+function createSearchPanel(view: EditorView): Panel {
 	const dom = document.createElement("div");
-	dom.className = "regex-find-panel";
+	dom.className = "regex-search-panel";
 
 	const modeButton = document.createElement("button");
-	modeButton.className = "regex-find-mode-button clickable-icon";
+	modeButton.className = "regex-search-mode-button clickable-icon";
 	modeButton.type = "button";
 	modeButton.setAttribute("aria-label", "Toggle regex / plain text mode");
 	modeButton.innerHTML =
-		'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-icon regex-find-mode-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+		'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="svg-icon regex-search-mode-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
 		'<circle cx="4" cy="19" r="1.6" fill="currentColor" stroke="none"></circle>' +
 		'<line x1="15" y1="4" x2="15" y2="16"></line>' +
 		'<line x1="20" y1="7" x2="10" y2="13"></line>' +
@@ -172,45 +172,45 @@ function createFindPanel(view: EditorView): Panel {
 		"</svg>";
 
 	const inputWrap = document.createElement("div");
-	inputWrap.className = "regex-find-input-wrap";
+	inputWrap.className = "regex-search-input-wrap";
 
 	const input = document.createElement("input");
 	input.type = "text";
-	input.className = "regex-find-input";
-	input.placeholder = "Find (regex or text)";
+	input.className = "regex-search-input";
+	input.placeholder = "Search (regex or text)";
 	input.spellcheck = false;
 
 	const countLabel = document.createElement("span");
-	countLabel.className = "regex-find-count";
+	countLabel.className = "regex-search-count";
 
 	inputWrap.append(input, countLabel);
 
 	const prevButton = document.createElement("button");
 	prevButton.type = "button";
-	prevButton.className = "regex-find-nav-button";
+	prevButton.className = "regex-search-nav-button";
 	prevButton.textContent = "↑";
 	prevButton.title = "Previous match (Shift+Enter)";
 
 	const nextButton = document.createElement("button");
 	nextButton.type = "button";
-	nextButton.className = "regex-find-nav-button";
+	nextButton.className = "regex-search-nav-button";
 	nextButton.textContent = "↓";
 	nextButton.title = "Next match (Enter)";
 
 	const selectAllButton = document.createElement("button");
 	selectAllButton.type = "button";
-	selectAllButton.className = "regex-find-select-all-button";
+	selectAllButton.className = "regex-search-select-all-button";
 	selectAllButton.textContent = "Select all";
 	selectAllButton.title = "Select all matches (Alt+Enter)";
 
 	const closeButton = document.createElement("button");
 	closeButton.type = "button";
-	closeButton.className = "regex-find-close-button";
+	closeButton.className = "regex-search-close-button";
 	closeButton.textContent = "×";
 	closeButton.title = "Close (Esc)";
 
 	function refresh() {
-		const state = view.state.field(findField);
+		const state = view.state.field(searchField);
 		modeButton.title =
 			state.mode === "regex" ? "Regex mode (click for plain text)" : "Plain text mode (click for regex)";
 		modeButton.classList.toggle("is-active", state.mode === "regex");
@@ -224,7 +224,7 @@ function createFindPanel(view: EditorView): Panel {
 		} else {
 			countLabel.textContent = `${state.activeIndex + 1}/${state.matches.length}`;
 		}
-		countLabel.classList.toggle("regex-find-invalid", state.invalidRegex);
+		countLabel.classList.toggle("regex-search-invalid", state.invalidRegex);
 		if (state.invalidRegex) countLabel.title = "Invalid regex — matching as plain text";
 		else countLabel.removeAttribute("title");
 
@@ -246,7 +246,7 @@ function createFindPanel(view: EditorView): Panel {
 		evt.stopPropagation();
 
 		if (evt.key === "Escape") {
-			closeFindBar(view);
+			closeSearchBar(view);
 			return;
 		}
 
@@ -265,7 +265,7 @@ function createFindPanel(view: EditorView): Panel {
 	prevButton.addEventListener("click", () => navigateMatch(view, -1));
 	nextButton.addEventListener("click", () => navigateMatch(view, 1));
 	selectAllButton.addEventListener("click", () => selectAllMatches(view));
-	closeButton.addEventListener("click", () => closeFindBar(view));
+	closeButton.addEventListener("click", () => closeSearchBar(view));
 
 	dom.append(modeButton, inputWrap, prevButton, nextButton, selectAllButton, closeButton);
 
@@ -273,7 +273,7 @@ function createFindPanel(view: EditorView): Panel {
 		dom,
 		top: true,
 		mount() {
-			const state = view.state.field(findField);
+			const state = view.state.field(searchField);
 			input.value = state.query;
 			refresh();
 			input.focus();
@@ -285,4 +285,4 @@ function createFindPanel(view: EditorView): Panel {
 	};
 }
 
-export const regexFindExtension: Extension = [findField];
+export const regexSearchExtension: Extension = [searchField];

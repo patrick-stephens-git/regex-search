@@ -1,4 +1,4 @@
-.regex-find-panel {
+.regex-search-panel {
 	display: flex;
 	align-items: center;
 	gap: 6px;
@@ -8,17 +8,17 @@
 	font-size: var(--font-ui-small);
 }
 
-.regex-find-mode-button {
+.regex-search-mode-button {
 	flex: 0 0 auto;
 	box-shadow: none;
 }
 
-.regex-find-mode-button.is-active {
+.regex-search-mode-button.is-active {
 	color: var(--icon-color-active, var(--text-normal));
 	background-color: var(--background-modifier-active-hover, var(--background-modifier-hover));
 }
 
-.regex-find-input-wrap {
+.regex-search-input-wrap {
 	position: relative;
 	flex: 1 1 auto;
 	min-width: 120px;
@@ -26,13 +26,13 @@
 	align-items: center;
 }
 
-.regex-find-input {
+.regex-search-input {
 	width: 100%;
 	box-sizing: border-box;
 	padding: 2px 4.5em 2px 8px;
 }
 
-.regex-find-count {
+.regex-search-count {
 	position: absolute;
 	right: 8px;
 	pointer-events: none;
@@ -40,13 +40,13 @@
 	white-space: nowrap;
 }
 
-.regex-find-count.regex-find-invalid {
+.regex-search-count.regex-search-invalid {
 	color: var(--text-error);
 }
 
-.regex-find-nav-button,
-.regex-find-select-all-button,
-.regex-find-close-button {
+.regex-search-nav-button,
+.regex-search-select-all-button,
+.regex-search-close-button {
 	padding: 2px 8px;
 	border-radius: var(--button-radius);
 	background-color: var(--background-modifier-form-field);
@@ -54,13 +54,13 @@
 	cursor: pointer;
 }
 
-.regex-find-nav-button:disabled,
-.regex-find-select-all-button:disabled {
+.regex-search-nav-button:disabled,
+.regex-search-select-all-button:disabled {
 	opacity: 0.5;
 	cursor: default;
 }
 
-.regex-find-close-button {
+.regex-search-close-button {
 	font-size: 1.1em;
 	line-height: 1;
 	padding: 2px 6px;

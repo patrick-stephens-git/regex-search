@@ -1,18 +1,18 @@
 import { Plugin } from "obsidian";
 import type { EditorView } from "@codemirror/view";
-import { openFindBar, regexFindExtension } from "./findExtension";
+import { openSearchBar, regexSearchExtension } from "./searchExtension";
 
 export default class RegexSearchPlugin extends Plugin {
 	async onload(): Promise<void> {
-		this.registerEditorExtension(regexFindExtension);
+		this.registerEditorExtension(regexSearchExtension);
 
 		this.addCommand({
-			id: "open-regex-find-bar",
-			name: "Open regex find bar",
+			id: "open-regex-search-bar",
+			name: "Open regex search bar",
 			editorCallback: (editor) => {
 				const view = (editor as unknown as { cm?: EditorView }).cm;
 				if (!view) return;
-				openFindBar(view);
+				openSearchBar(view);
 			},
 		});
 	}
