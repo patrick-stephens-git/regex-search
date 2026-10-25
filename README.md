@@ -4,6 +4,8 @@ Find matches in the current note using a regex or plain-text pattern, with live 
 
 This plugin is desktop only (it isn't available on Obsidian mobile). I built and tested it on macOS. It should work the same on Windows and Linux, but I haven't tried those, so please open an issue if something doesn't work.
 
+![Regex Search Bar highlighting dates in a note](https://raw.githubusercontent.com/patrick-stephens-git/regex-search-bar/main/screenshots/1-regex-dates.png)
+
 ## Usage
 
 1. Make sure Regex Search Bar is turned on. Open Settings → Community plugins and switch on the toggle next to **Regex Search Bar**.
